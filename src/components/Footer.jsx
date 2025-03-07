@@ -53,8 +53,7 @@ const ProfileCard = ({ name, username, image, link, platform }) => {
       </a>
     </motion.div>
   );
-};
-
+}; 
 const Footer = () => {
   return (
     <>
