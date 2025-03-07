@@ -50,7 +50,14 @@ const Skills = () => {
       <div className="grid grid-cols-3 gap-3 w-full justify-center lg:grid-cols-2 md:flex md:flex-col md:gap-6">
         {skills.map((category, index) => {
           const categoryName = Object.keys(category)[0]; // Get category name
-          const categorySkills = Object.values(category)[0]; // Get skills list
+          const categorySkills = Object.values(category)[0]; // Get skills list  lg:flex-col lg:flex-row w-full lg:justify-between
+
+          // Define positioning logic
+          const isFrontend = categoryName === "Frontend Development";
+          const isBackend = categoryName === "Backend Development";
+          const isTesting = categoryName === "Testing & Tools";
+          const isDatabase = categoryName === "Database";
+          const isPrototyping = categoryName === "Design & Prototyping";
 
           return (
             <motion.div
@@ -58,7 +65,28 @@ const Skills = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.15 + 0.3, duration: 0.5 }}
-              className="flex flex-col items-center"
+              className={`flex flex-col items-center 
+        ${isFrontend ? "row-span-2 col-start-1 row-start-1" : ""} 
+        ${
+          isBackend
+            ? "col-start-2 row-start-1 lg:col-start-2 lg:row-start-1   "
+            : ""
+        } 
+        ${
+          isTesting
+            ? "col-start-3 row-start-1 lg:col-start-2 lg:row-start-2  "
+            : ""
+        } 
+        ${
+          isDatabase
+            ? "col-start-2 row-start-2 lg:col-start-1 lg:row-start-3 "
+            : ""
+        } 
+        ${
+          isPrototyping
+            ? "col-start-3 row-start-2 lg:col-start-2 lg:row-start-3  "
+            : ""
+        }`}
             >
               <h3 className="text-[18px] font-medium mb-5">{categoryName}</h3>
               <div className="grid grid-cols-2 gap-3">

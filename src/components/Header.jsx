@@ -25,6 +25,8 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+
+  console.log(isMobileMenuOpen,"isMobileMenuOpen")
   return (
     <AnimatePresence>
       {isVisible && (
@@ -47,7 +49,7 @@ const Header = () => {
               className="lg:block hidden  "
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              <FeatherIcon icon="menu" size={24} strokeWidth={2} />
+              <FeatherIcon icon="menu" size={24} strokeWidth={2} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
             </button>
 
             {/* Desktop Navigation */}
@@ -86,14 +88,14 @@ const Header = () => {
           </div>
 
           {/* Mobile Menu */}
-          <AnimatePresence>
-            {isMobileMenuOpen && (
+          {isMobileMenuOpen && ( <AnimatePresence>
+          
               <motion.div
                 initial={{ x: "100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ duration: 0.3 }}
-                className="fixed top-0 right-0 w-[300px] h-full bg-white text-brand-primary flex flex-col items-center justify-center shadow-lg lg:hidden"
+                className="fixed top-0 right-0 w-[300px] h-full bg-white text-brand-primary flex flex-col items-center justify-center shadow-lg  "
               >
                 <button
                   className="absolute top-5 right-5"
@@ -127,14 +129,15 @@ const Header = () => {
                         size={20}
                         fill="#fff"
                         stroke="white"
-                        strokeWidth={3}
+                        strokeWidth={1}
                       />
                     </motion.span>
                   ))}
                 </div>
               </motion.div>
-            )}
+            
           </AnimatePresence>
+          )}
         </motion.header>
       )}
     </AnimatePresence>
