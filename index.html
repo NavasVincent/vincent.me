@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vincent.me/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
     rel="stylesheet" />
   <title>Vincent.Me</title>
@@ -27,7 +27,7 @@
         ball.style.height = ball.style.width;
 
         balls.push(ball);
-        document.body.append(ball);
+        document.getElementById("balls-container").append(ball);
       }
 
       // Keyframes
@@ -53,12 +53,15 @@
       });
     })
   </script>
-  <script type="module" crossorigin src="/vincent.me/assets/index-DZCqGxSh.js"></script>
-  <link rel="stylesheet" crossorigin href="/vincent.me/assets/index-B34vw6R3.css">
+  <script type="module" crossorigin src="/vincent.me/assets/index-C9qyiKQh.js"></script>
+  <link rel="modulepreload" crossorigin href="/vincent.me/assets/vendor-BP5Vs30O.js">
+  <link rel="stylesheet" crossorigin href="/vincent.me/assets/index-C8K4s0O3.css">
 </head>
 
 <body>
+  <div id="balls-container"></div>
   <div id="root"></div>
+
   <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
 </body>
 
