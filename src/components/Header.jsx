@@ -127,7 +127,7 @@ const Header = () => {
                       <FeatherIcon
                         icon={icon}
                         size={20}
-                        fill="#fff"
+                        // fill="#fff"
                         stroke="white"
                         strokeWidth={1}
                       />
