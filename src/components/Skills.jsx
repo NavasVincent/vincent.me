@@ -100,7 +100,7 @@ const Skills = () => {
                       key={i}
                       whileHover={{ scale: 1.1 }}
                       transition={{ type: "spring", stiffness: 200 }}
-                      className={`border border-[#F59E0B] text-[#F59E0B] px-4 py-2 rounded-full text-[12px] text-center whitespace-nowrap shadow-card font-regular transition-all duration-300 hover:bg-[#F59E0B] hover:text-white
+                      className={`cursor-pointer border border-[#F59E0B] text-[#F59E0B] px-4 py-2 rounded-full text-[12px] text-center whitespace-nowrap shadow-card font-regular transition-all duration-300 hover:bg-[#F59E0B] hover:text-white
                       ${
                         isLastItem
                           ? "col-span-2 flex justify-center w-[max-content] items-center justify-self-center"
