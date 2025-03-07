@@ -5,6 +5,8 @@ import Boomsourcing from "../assets/boomsourcing.png";
 import DigitalEngine from "../assets/digital-engine.png";
 import LiberyCenter from "../assets/liberty-center.png";
 import Wylog from "../assets/wylog.png";
+import { motion } from "framer-motion";
+
 const timeLineExperience = [
   {
     jobTitle: "Software Engineer",
@@ -80,22 +82,33 @@ const Experience = () => {
       </div>
       <div className="flex flex-wrap justify-center">
         <div class=" mx-auto w-full overflow-auto overflow-y-hidden">
-          <div class="relative w-full">
-            <div class="running-light absolute h-full flex items-center justify-center left-[50%] translate-x-[-50%] ml-[-1px]"></div>
+          <div class="relative w-full lg:hidden">
+            <motion.div
+              class="running-light absolute h-full flex items-center justify-center left-[50%] translate-x-[-50%] ml-[-1px]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            ></motion.div>
             <div class="absolute h-full left-[50%] translate-x-[-50%] border-l-[1px] border-dashed border-[94A3B8]"></div>
 
             {timeLineExperience.map((item, index) => {
               const isEven = index % 2 === 0;
               if (isEven) {
                 return (
-                  <div class="relative flex flex-row flex flex-row w-full">
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.15 + 0.3, duration: 0.5 }}
+                    class="relative flex flex-row w-full  cursor-pointer"
+                    whileHover={{ scale: 1.05 }}
+                  >
                     <div class="flex flex-col items-end w-1/2 pr-10">
                       <img
                         src={item.companyLogo}
                         alt="Boom.ai Logo"
-                        class=" h-9 "
+                        class="h-9"
                       />
-
                       <h3 class="text-[16px] font-medium">
                         {item.companyName}
                       </h3>
@@ -110,46 +123,66 @@ const Experience = () => {
                           ))}
                       </p>
                     </div>
-                    <div class="absolute mt-3  flex items-center justify-center left-[50%] translate-x-[-50%] w-5 h-5 bg-white rounded-full border-[1px] border-dashed border-[94A3B8]">
-                      <div class=" w-3 h-3 bg-[#F59E0B] rounded-full"> </div>
-                    </div>
-                    <div className="flex flex-col   pl-10  w-1/2">
-                      <h4 class="text-[18px] mt-2 flex  items-end gap-2">
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.15 + 0.3, duration: 0.5 }}
+                      class="absolute mt-3 flex items-center justify-center left-[49.2%] translate-x-[-50%] w-5 h-5 bg-white rounded-full border-[1px] border-dashed border-[94A3B8]"
+                      whileHover={{ scale: 1.2 }}
+                    >
+                      <div class="w-3 h-3 bg-[#F59E0B] rounded-full"></div>
+                    </motion.div>
+                    <div className="flex flex-col pl-10 w-1/2">
+                      <h4 class="text-[18px] mt-2 flex items-end gap-2">
                         {item.jobTitle}
                         <p class="text-[#94A3B8] font-light text-[11px]">
                           ({item.employmentType})
                         </p>
                       </h4>
-                      <p class="text-[#94A3B8] font-light text-[12px] leading-relaxed text-left pb-10 ">
+                      <p class="text-[#94A3B8] font-light text-[12px] leading-relaxed text-left pb-10">
                         {item.jobDescription}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               } else {
                 return (
-                  <div class=" relative flex flex-row flex flex-row w-full">
-                    <div className="flex flex-col  items-end 0 pr-10 border-dashed  w-1/2">
-                      <h4 class="text-[18px] mt-2 flex  items-end gap-2">
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.15 + 0.3, duration: 0.5 }}
+                    class="relative flex flex-row w-full cursor-pointer"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <div className="flex flex-col items-end pr-10 w-1/2">
+                      <h4 class="text-[18px] mt-2 flex items-end gap-2">
                         {item.jobTitle}
                         <p class="text-[#94A3B8] font-light text-[11px]">
                           ({item.employmentType})
                         </p>
                       </h4>
-                      <p class="text-[#94A3B8] font-light text-[12px] leading-relaxed text-right pb-10 ">
+                      <p class="text-[#94A3B8] font-light text-[12px] leading-relaxed text-right pb-10">
                         {item.jobDescription}
                       </p>
                     </div>
-                    <div class="absolute mt-3 flex items-center justify-center left-[50%] translate-x-[-50%] w-5 h-5 bg-white rounded-full border-[1px] border-dashed border-[94A3B8]">
-                      <div class=" w-3 h-3 bg-[#F59E0B] rounded-full"> </div>
-                    </div>
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.15 + 0.3, duration: 0.5 }}
+                      class="absolute mt-3 flex items-center justify-center left-[49.2%] translate-x-[-50%] w-5 h-5 bg-white rounded-full border-[1px] border-dashed border-[94A3B8]"
+                      whileHover={{ scale: 1.2 }}
+                    >
+                      <div class="w-3 h-3 bg-[#F59E0B] rounded-full"></div>
+                    </motion.div>
                     <div class="flex flex-col items-start w-1/2 pl-10">
                       <img
                         src={item.companyLogo}
                         alt="Boom.ai Logo"
                         class="h-9"
                       />
-
                       <h3 class="text-[16px] font-medium">
                         {item.companyName}
                       </h3>
@@ -164,10 +197,61 @@ const Experience = () => {
                           ))}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               }
             })}
+          </div>
+
+          <div className="hidden lg:block relative px-4">
+            <div class="running-light absolute h-full flex items-center justify-center left-[30px] translate-x-[0] ml-[-1px]"></div>
+            <div class="absolute h-full left-[30px] translate-x-[0%] border-l-[1px] border-dashed border-[94A3B8]"></div>
+            {timeLineExperience.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.15 + 0.3, duration: 0.5 }}
+                className="flex flex-row gap-5 relative group transition-all duration-300"
+              >
+                <div class="mt-10 flex items-center justify-center ml-[7px] w-5 h-5 bg-white rounded-full border-[1px] border-dashed border-[94A3B8] z-30">
+                  <div class="w-3 h-3 bg-[#F59E0B] rounded-full"></div>
+                </div>
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.15 + 0.3, duration: 0.5 }}
+                  // whileHover={{ scale: 1.05 }}
+                  className="relative mb-10 p-6 bg-white rounded-lg transition-all duration-300  hover:scale-105 hover:shadow-lg hover:border"
+                >
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={item.companyLogo}
+                      alt={`${item.companyName} Logo`}
+                      className="w-12 h-12 object-contain"
+                    />
+                    <div>
+                      <h3 className="text-lg font-medium">
+                        {item.companyName}
+                      </h3>
+                      <p className="text-gray-500 text-sm">
+                        {item.employmentPeriod}
+                      </p>
+                    </div>
+                  </div>
+                  <h4 className="text-xl font-semibold mt-3">
+                    {item.jobTitle}
+                  </h4>
+                  <p className="text-gray-600 text-sm">
+                    ({item.employmentType})
+                  </p>
+                  <p className="text-gray-700 mt-2 text-sm leading-relaxed">
+                    {item.jobDescription}
+                  </p>
+                </motion.div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>

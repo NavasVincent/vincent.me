@@ -15,7 +15,7 @@ export default {
         "base-divider-grey": "#DEE2F1",
         "brand-secondary": "#F59E0B",
         "brand-secondary-100": "#f81d39",
-        "brand-primary": "#EE7019",
+        "brand-primary": "#fd8a42",
 
         "brand-primary-5": "#F8F9FA",
         "brand-primary-60": "#858D99",
@@ -60,7 +60,13 @@ export default {
       boxShadow: {
         "inset-shadow": "inset 0px 2px 2px rgba(0, 0, 0, 0.25)",
         "card": "1px 0px 5px rgba(0, 0, 0, 0.1)",
-      }
+      },
+      screens:{
+        'xl': {'max': "1380px"},
+        'lg': { 'max': '768px'},
+        'md': {'max': '440px'},
+        'sm': {'max': '375px'}
+      },
     },
   },
   plugins: [],

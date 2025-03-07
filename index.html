@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
     rel="stylesheet" />
   <title>Vincent.Me</title>
@@ -27,7 +28,7 @@
         ball.style.height = ball.style.width;
 
         balls.push(ball);
-        document.body.append(ball);
+        document.getElementById("balls-container").append(ball);
       }
 
       // Keyframes
@@ -56,7 +57,9 @@
 </head>
 
 <body>
+  <div id="balls-container"></div>
   <div id="root"></div>
+
   <script type="module" src="/src/main.jsx"></script>
   <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
 </body>
