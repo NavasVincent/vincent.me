@@ -102,16 +102,19 @@ const HeroMe = () => {
           </div>
         </motion.div>
         <motion.img
-          src={img1}
-          className="w-[250px] z-50 md:w-[200px]"
-          width="300"
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-          whileHover={{ scale: 1.05 }}
-          animate={{ y: [0, -5, 0], opacity: [1, 0.9, 1] }}
-          transition={{ repeat: Infinity, repeatType: "mirror", duration: 3, ease: "easeInOut" }}
-        />
+  src={img1}
+  className="w-[250px] z-50 md:w-[200px]"
+  width="300"
+  initial={{ opacity: 0, x: 50 }}
+  animate={{ opacity: 1, x: 0, y: [0, -5, 0] }}
+  transition={{
+    opacity: { duration: 0.8, ease: "easeOut", delay: 0.3 },
+    x: { duration: 0.8, ease: "easeOut", delay: 0.3 },
+    y: { repeat: Infinity, repeatType: "mirror", duration: 3, ease: "easeInOut" }
+  }}
+  whileHover={{ scale: 1.05 }}
+/>
+
       </div>
     </section>
   );
