@@ -64,7 +64,7 @@ export default {
       screens:{
         'xl': {'max': "1380px"},
         'lg': { 'max': '768px'},
-        'md': {'max': '440px'},
+        'md': {'max': '500px'},
         'sm': {'max': '375px'}
       },
     },

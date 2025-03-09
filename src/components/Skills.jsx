@@ -33,7 +33,7 @@ const Skills = () => {
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.6 }}
-        className="flex flex-col items-center gap-1 ml-6 pt-[70px]"
+        className="flex flex-col items-center gap-1 pt-[70px] md:mx-4"
       >
         <h2 className="text-[24px] font-medium mb-2">Skills & Expertise</h2>
         <p className="text-[#94A3B8] font-light text-[12px] leading-relaxed text-center">

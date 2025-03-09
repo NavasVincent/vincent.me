@@ -25,8 +25,7 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-
-  console.log(isMobileMenuOpen,"isMobileMenuOpen")
+ 
   return (
     <AnimatePresence>
       {isVisible && (

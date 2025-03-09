@@ -6,10 +6,11 @@ import { Experience } from "./components/TimelineExperience";
 import { Skills } from "./components/Skills";
 import { Footer } from "./components/Footer";
 import { WhatIdo } from "./components/WhatIdo";
+import {GetInTouch} from "./components/GetInTouch"
 
 function App() {
   return (
-    <div className="font-sans bg-gray-50 font-regular">
+    <div className="font-sans bg-gray-50 font-regular text-[12px] z-30">
            <Header />
       <div class="container-fluid !mt-[-66px]">
         <div className="background"> 
@@ -21,8 +22,13 @@ function App() {
       <WhatIdo />
       <Experience />
       <Skills />
-      <Footer />
-    </div>
+      <GetInTouch/>
+
+
+      <Footer /> 
+
+
+   </div>
   );
 }
 

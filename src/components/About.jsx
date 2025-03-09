@@ -68,7 +68,7 @@ const About = () => {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="mt-4 uppercase text-brand-primary border border-solid border-brand-primary px-8 py-2 rounded-lg hover:bg-brand-primary hover:text-white transition-all duration-300"
+          className="mt-4 uppercase text-brand-primary border border-solid border-brand-primary px-8 py-2 rounded-lg hover:bg-brand-primary hover:text-white transition-all duration-300 w-[fit-content]"
         >
           Hire me
         </motion.button>
@@ -77,4 +77,4 @@ const About = () => {
   );
 };
 
-export { About };
+export { About }; 

@@ -12,11 +12,14 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "axios": "^1.8.2",
     "feather-icons": "^4.29.2",
     "feather-icons-react": "^0.7.0",
     "framer-motion": "^12.4.10",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-google-recaptcha-v3": "^1.10.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

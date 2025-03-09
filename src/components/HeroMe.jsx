@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import img from "../assets/Rectangle-bg.png";
 import img1 from "../assets/me1.png";
-
+import {handleCalendlyPopup} from "../Functions/tools"
 const HeroMe = () => {
   const fullText = "VINCENT BOTALON NAVAS";
   const [displayText, setDisplayText] = useState("");
@@ -89,6 +89,7 @@ const HeroMe = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className="uppercase bg-brand-primary text-white px-8 py-2 rounded transition-all duration-300 hover:bg-orange-600"
+              onClick={handleCalendlyPopup}
             >
               Hire me
             </motion.button>

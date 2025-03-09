@@ -68,7 +68,7 @@ const Experience = () => {
 
   return (
     <section className="w-full gap-3 flex flex-col justify-between items-start max-w-[1150px] m-auto py-8 mt-5 gap-[50px]">
-      <div className="flex flex-col items-center gap-1 ml-6 pt-[70px]">
+      <div className="flex flex-col items-center gap-1 pt-[70px] md:mx-4">
         <h2 className="text-[24px] font-medium mb-2">Work Experience</h2>
         <p className="text-[#94A3B8] font-light text-[12px] leading-relaxed text-center">
           I have experience as a Software Engineer, Junior Developer, Graphic
