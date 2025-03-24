@@ -82,7 +82,7 @@ const HeroMe = () => {
             animate={{ opacity: 1, letterSpacing: "0px" }}
             transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
           >
-            SOFTWARE ENGINEER | FRONTEND DEVELOPER
+          Crafting Seamless Experiences through Code and Creativity.
           </motion.h4>
           <div className="flex flex-row gap-3 mt-6 lg:justify-center justify-start">
             <motion.button
@@ -91,7 +91,7 @@ const HeroMe = () => {
               className="uppercase bg-brand-primary text-white px-8 py-2 rounded transition-all duration-300 hover:bg-orange-600"
               onClick={handleCalendlyPopup}
             >
-              Hire me
+              Book a Call
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.1 }}

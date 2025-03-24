@@ -1,34 +1,15 @@
 import { useState } from "react";
+import { Home } from "./views/Home";
 import { Header } from "./components/Header";
-import { HeroMe } from "./components/HeroMe";
-import { About } from "./components/About";
-import { Experience } from "./components/TimelineExperience";
-import { Skills } from "./components/Skills";
-import { Footer } from "./components/Footer";
-import { WhatIdo } from "./components/WhatIdo";
-import {GetInTouch} from "./components/GetInTouch"
+import { Footer } from "./components/Footer"; 
 
 function App() {
   return (
     <div className="font-sans bg-gray-50 font-regular text-[12px] z-30">
-           <Header />
-      <div class="container-fluid !mt-[-66px]">
-        <div className="background"> 
-          <HeroMe />
-        </div>
-      </div>
-
-      <About />
-      <WhatIdo />
-      <Experience />
-      <Skills />
-      <GetInTouch/>
-
-
-      <Footer /> 
-
-
-   </div>
+      <Header />
+      <Home />
+      <Footer />
+    </div>
   );
 }
 

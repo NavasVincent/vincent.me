@@ -15,7 +15,7 @@ export default {
         "base-divider-grey": "#DEE2F1",
         "brand-secondary": "#F59E0B",
         "brand-secondary-100": "#f81d39",
-        "brand-primary": "#fd8a42",
+        "brand-primary": "#F59E0B",
 
         "brand-primary-5": "#F8F9FA",
         "brand-primary-60": "#858D99",

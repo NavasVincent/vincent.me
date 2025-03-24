@@ -1,10 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import img2 from "../assets/me2.png";
-
+import {handleCalendlyPopup} from "../Functions/tools"
 const About = () => {
   return (
-    <section className="w-full flex lg:flex-col  lg:items-center flex-row gap-6 items-center justify-between max-w-[1150px] mx-auto py-12 px-4">
+    <section className="w-full flex lg:flex-col  lg:items-center flex-row gap-6 items-center justify-between max-w-[1150px] mx-auto py-12 px-4" id="about-me">
       
       {/* Image Section */}
       <div className="relative w-[280px] md:w-[300px] flex-shrink-0">
@@ -69,8 +69,9 @@ const About = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className="mt-4 uppercase text-brand-primary border border-solid border-brand-primary px-8 py-2 rounded-lg hover:bg-brand-primary hover:text-white transition-all duration-300 w-[fit-content]"
-        >
-          Hire me
+          onClick={handleCalendlyPopup}
+      >
+          Set A Meeting
         </motion.button>
       </motion.div>
     </section>

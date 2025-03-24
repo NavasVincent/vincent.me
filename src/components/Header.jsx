@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import FeatherIcon from "feather-icons-react";
+import { scrollToSection } from "../Functions/tools";
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -25,7 +26,6 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
- 
   return (
     <AnimatePresence>
       {isVisible && (
@@ -48,25 +48,36 @@ const Header = () => {
               className="lg:block hidden  "
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              <FeatherIcon icon="menu" size={24} strokeWidth={2} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
+              <FeatherIcon
+                icon="menu"
+                size={24}
+                strokeWidth={2}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              />
             </button>
 
             {/* Desktop Navigation */}
             <div className="lg:hidden flex flex-row items-center gap-6 text-[13px]">
-              {["Home", "About Me", "Experience", "Contact Me"].map(
-                (item, index) => (
-                  <motion.span
-                    key={index}
-                    whileHover={{ scale: 1.1 }}
-                    className="relative cursor-pointer transition-all duration-300 group"
-                  >
-                    {item}
-                    {/* Underline effect on hover of parent div */}
-                    <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-brand-primary transition-all duration-300 group-hover:w-full"></span>
-                  </motion.span>
-                )
-              )}
+              {["About Me","Services", "Experience","Skills", "Contact Me"].map(
+                (item, index) => { 
+                  const sectionId = item
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")
+                    .trim();
 
+                  return (
+                    <motion.span
+                      key={index}
+                      whileHover={{ scale: 1.1 }}
+                      className="relative cursor-pointer transition-all duration-300 group"
+                      onClick={() => scrollToSection(sectionId)}
+                    >
+                      {item} 
+                      <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-brand-primary transition-all duration-300 group-hover:w-full"></span>
+                    </motion.span>
+                  );
+                }
+              )}
               {["linkedin", "instagram", "facebook"].map((icon, index) => (
                 <motion.span
                   key={index}
@@ -87,8 +98,8 @@ const Header = () => {
           </div>
 
           {/* Mobile Menu */}
-          {isMobileMenuOpen && ( <AnimatePresence>
-          
+          {isMobileMenuOpen && (
+            <AnimatePresence>
               <motion.div
                 initial={{ x: "100%" }}
                 animate={{ x: 0 }}
@@ -134,8 +145,7 @@ const Header = () => {
                   ))}
                 </div>
               </motion.div>
-            
-          </AnimatePresence>
+            </AnimatePresence>
           )}
         </motion.header>
       )}

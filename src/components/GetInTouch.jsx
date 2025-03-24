@@ -123,6 +123,7 @@ const GetInTouch = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="w-full gap-3 flex flex-col justify-between items-start max-w-[1150px] m-auto py-8 mt-5 gap-[50px]"
+      id="contact-me"
     >
       <motion.div
         initial={{ opacity: 0, y: -30 }}

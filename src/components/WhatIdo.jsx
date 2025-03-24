@@ -52,7 +52,7 @@ const WhatIdo = () => {
   };
 
   return (
-    <section className="w-full flex flex-col items-center max-w-[1150px] m-auto py-8 px-4 md:px-4 mt-5">
+    <section className="w-full flex flex-col items-center max-w-[1150px] m-auto py-8 px-4 md:px-4 mt-5" id="services">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
