@@ -3,7 +3,7 @@ import { animate } from "framer-motion";
 export const handleCalendlyPopup = () => {
     if (window.Calendly) {
       window.Calendly.initPopupWidget({
-        url: "https://calendly.com/vhincebotalon/let-s-work-together-book-a-call",
+        url: "https://calendly.com/vhincebotalon/let-s-work-together-book-a-call-1",
       });
     }
   }; 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import FeatherIcon from "feather-icons-react";
 
+import { Each, Show,truncateText } from "@bluelens/react-utils";
 const cardDetails = [
   {
     title: "UI/UX",
@@ -68,13 +69,15 @@ const WhatIdo = () => {
       </motion.div>
 
       <div className="grid md:flex md:flex-col lg:grid-cols-2 grid-cols-3 gap-6 w-full z-30">
-        {cardDetails.map((card, index) => (
-          <motion.div
+      <Each
+          of={cardDetails}
+          render={(card, index) => {
+ return <motion.div
             key={index}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="p-5 rounded-[10px] bg-white shadow-lg flex flex-col justify-between gap-2 transition-all duration-300 hover:shadow-xl h-[fit-content]"
+            className="p-5 rounded-[10px] bg-white shadow-lg flex flex-col justify-between gap-2 transition-all duration-300 hover:shadow-xl h-[fit-content] cursor-pointer"
           >
             <div className="flex flex-col">
               <span className="flex flex-row gap-2 items-center text-[18px]">
@@ -83,12 +86,12 @@ const WhatIdo = () => {
               </span>
               <div
                 className={`overflow-hidden transition-[max-height] duration-500 ease-in-out`}
-                style={{
-                  maxHeight: expanded[index] ? "500px" : "60px",
-                }}
+                // style={{
+                //   maxHeight: expanded[index] ? "500px" : "60px",
+                // }}
               >
                 <p className="text-[#94A3B8] text-[12px] sm:text-[14px] leading-relaxed mt-2">
-                  {card.description}
+                  {expanded[index] ?  card?.description: truncateText(card.description, 120) }
                 </p>
               </div>
             </div>
@@ -103,7 +106,7 @@ const WhatIdo = () => {
               />
             </button>
           </motion.div>
-        ))}
+          }} />
       </div>
     </section>
   );

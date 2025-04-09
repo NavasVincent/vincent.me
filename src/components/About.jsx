@@ -1,11 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import img2 from "../assets/me2.png";
-import {handleCalendlyPopup} from "../Functions/tools"
+import { handleCalendlyPopup } from "../Functions/tools";
 const About = () => {
   return (
-    <section className="w-full flex lg:flex-col  lg:items-center flex-row gap-6 items-center justify-between max-w-[1150px] mx-auto py-12 px-4" id="about-me">
-      
+    <section
+      className="w-full flex lg:flex-col  lg:items-center flex-row gap-6 items-center justify-between max-w-[1150px] mx-auto py-12 px-4"
+      id="about-me"
+    >
       {/* Image Section */}
       <div className="relative w-[280px] md:w-[300px] flex-shrink-0">
         <motion.img
@@ -52,16 +54,17 @@ const About = () => {
         <p className="text-gray-600 text-[14px] leading-relaxed">
           I'm a passionate Software Engineer with a strong foundation in both
           frontend and backend technologies. I specialize in creating dynamic,
-          user-friendly applications, utilizing my skills in JavaScript,
-          ReactJS, NodeJS, and various other frameworks. Driven by a love for
-          problem-solving and innovation, I am dedicated to writing clean,
-          efficient code that enhances user experiences and optimizes
-          performance.
+          user-friendly applications using JavaScript, ReactJS, NodeJS, and
+          various other frameworks. Driven by a love for problem-solving and
+          innovation, I focus on writing clean, efficient code that enhances
+          user experiences and improves performance.
           <br />
           <br />
-          I enjoy working in teams, where we can solve problems and succeed
-          together. I’m always looking to grow as a software engineer,
-          focusing on delivering quality solutions that truly make an impact.
+          Currently working full-time, I'm now exploring independent contract
+          opportunities with a remote (WFH) setup. I enjoy collaborating in team
+          environments where we can solve problems and succeed together. I'm
+          always striving to grow as a software engineer while delivering
+          impactful, high-quality solutions.
         </p>
 
         {/* Hire Me Button */}
@@ -70,7 +73,7 @@ const About = () => {
           whileTap={{ scale: 0.95 }}
           className="mt-4 uppercase text-brand-primary border border-solid border-brand-primary px-8 py-2 rounded-lg hover:bg-brand-primary hover:text-white transition-all duration-300 w-[fit-content]"
           onClick={handleCalendlyPopup}
-      >
+        >
           Set A Meeting
         </motion.button>
       </motion.div>
@@ -78,4 +81,4 @@ const About = () => {
   );
 };
 
-export { About }; 
+export { About };

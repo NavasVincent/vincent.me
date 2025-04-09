@@ -42,7 +42,11 @@
 } 
   */
 
-
+  .opacity-disabled{
+    opacity: 0.5;
+    cursor: not-allowed !important;
+  }
+  
   .container-fluid{
     height: 100%;
     margin: 0;
@@ -101,6 +105,7 @@
     left: 50vw;
     top: 10vh;
   }
+  
   @keyframes Gradient {
     0% {
       background-position: 0% 50%;

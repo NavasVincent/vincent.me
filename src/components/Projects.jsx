@@ -1,9 +1,40 @@
 import React from "react";
 import { motion } from "framer-motion";
 import OmismChat from "../assets/omism-chat.png";
+import CVLayout from "../assets/9cf4d780-c291-443c-81eb-d6cb3abe8939.png";
+import npmUtils from "../assets/npm-react-utils.png";
+
+import { Each, Show,truncateText } from "@bluelens/react-utils";
+
 import { handleCalendlyPopup } from "../Functions/tools";
 import FeatherIcon from "feather-icons-react";
 const Projects = () => {
+  const projects = [
+    {
+      title: "OMISM Chat",
+      subtitle: "Video Chat Web APP",
+      image: OmismChat,
+      figmaLink:
+        "https://www.figma.com/design/34o97RHCYwhuJxiRaFEDvj/OMISM-MOBILE-APP?node-id=53-2&t=IvuaNjJaZjZerKPs-0",
+      demoLink: "https://omism.chat/",
+    },
+    {
+      title: "Vincent.me",
+      subtitle: "Portfolio",
+      image: CVLayout,
+      figmaLink:
+        "https://www.figma.com/design/QsOrD375iWhB38c5xA3iAw/VIncent-Navas-CV?node-id=0-1&m=dev&t=fThD8rcxos2HTUyc-1",
+      demoLink: "https://navasvincent.github.io/vincent.me/",
+    },
+    {
+      title: "@bluelens/react-utils",
+      subtitle: "NPM Package",
+      image: npmUtils,
+      figmaLink: false,
+      demoLink: "https://www.npmjs.com/package/@bluelens/react-utils",
+    } 
+    // Add more items here...
+  ];
   return (
     <motion.section
       initial={{ opacity: 0, y: 50 }}
@@ -34,229 +65,81 @@ const Projects = () => {
           together!
         </p>
       </motion.div>
-     <div className="flex flex-row gap-6">
-     <div className="bg-[#fff] rounded-[20px] px-5 pb-5 pt-2  z-30  shadow-md" >
-      <div className="flex flex-row justify-between items-center ">
-          <label className="font-medium text-[18px]">OMISM Chat</label>
-          <label className="text-[#94A3B8]">Video Chat Web APP</label>
-        </div>
-        <img
-          src={OmismChat}
-          className="w-[400px]  rounded-[10px] border " //border-[4px] border-brand-primary 
+      <div className="flex flex-row gap-6 lg:flex-col lg:p-[20px]">
+        <Each
+          of={projects}
+          render={(project, idx) => {
+            return (
+              <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.5,
+              }} 
+                className="bg-[#fff] rounded-[20px] px-5 pb-5 pt-2 z-40 shadow-md cursor-pointer "
+              whileHover={{ scale: 1.05 }}
+            > 
+                <div className="flex flex-row justify-between items-center">
+                  <label className="font-medium text-[18px]">
+                    {project.title}
+                  </label>
+                  <label className="text-[#94A3B8]">{project.subtitle}</label>
+                </div>
+                <div className="w-[350px] overflow-hidden flex border justify-center items-center h-[182px] rounded-[10px] p-2 mt-2">
+                  <img
+                    src={project.image}
+                    className="h-full object-contain box-border"
+                  />
+                </div>
+               
+                <div className="flex flex-row justify-between items-center mt-4 ">
+                <Show.When isTrue={project.figmaLink}>
+                  <div className="flex flex-row gap-1">
+                    <FeatherIcon
+                      icon="figma"
+                      size={20}
+                      fill="#fff"
+                      stroke="#000"
+                      strokeWidth={2}
+                    />
+                    <span className="flex flex-col">
+                      <a
+                        href={project.figmaLink}
+                        target="_blank"
+                        rel="noopener noreferrer" 
+                      >
+                        <label className="text-[#94A3B8] flex flex-row gap-1 hover:underline hover:text-[dodgerblue] cursor-pointer">
+                          {truncateText(project?.figmaLink, 20)}
+                        </label>
+                      </a>
+                    </span>
+                  </div>
+                  </Show.When>
+                  <span className="flex flex-col">
+                    <a
+                      href={project.demoLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <label className="text-[#94A3B8] flex flex-row gap-1 hover:underline hover:text-[dodgerblue] cursor-pointer">
+                      <FeatherIcon
+                          icon="external-link"
+                          size={16}
+                          fill="#fff"
+                          stroke="#94A3B8"
+                          strokeWidth={1}
+                        />  Demo
+
+                      </label>
+                    </a>
+                  </span>
+                </div>
+              </motion.div>
+            );
+          }}
         />
-     
-        <div className="flex flex-row justify-between items-center mt-4">
-          <div className="flex flex-row gap-3  ">
-            {/* <div className="flex flex-row gap-3">
-              <FeatherIcon
-                icon={"github"}
-                size={20}
-                fill="#fff"
-                stroke="#000"
-                strokeWidth={2}
-              />{" "}
-              <span className="flex flex-col">
-                <a
-                  href="https://github.com/NavasVincent"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <label className="text-[#94A3B8] flex flex-row gap-1 hover:underline hover:text-[dodgerblue] cursor-pointer">
-                    Repository
-                  </label>
-                </a>
-              </span>
-            </div> */}
-            <div className="flex flex-row gap-3">
-              <FeatherIcon
-                icon={"figma"}
-                size={20}
-                fill="#fff"
-                stroke="#000"
-                strokeWidth={2}
-              />{" "}
-              <span className="flex flex-col">
-                <a
-                  href="https://www.figma.com/design/34o97RHCYwhuJxiRaFEDvj/OMISM-MOBILE-APP?node-id=53-2&t=IvuaNjJaZjZerKPs-0"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <label className="text-[#94A3B8] flex flex-row gap-1 hover:underline hover:text-[dodgerblue] cursor-pointer">
-                    Figma Design
-                  </label>
-                </a>
-              </span>
-            </div>
-          </div>
-          <span className="flex flex-col">
-            <a
-              href="https://omism.chat/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <label className="text-[#94A3B8] flex flex-row gap-1 hover:underline hover:text-[dodgerblue] cursor-pointer">
-                DEMO
-                <FeatherIcon
-                  icon={"external-link"}
-                  size={16}
-                  fill="#fff"
-                  stroke="#94A3B8"
-                  strokeWidth={1}
-                />
-              </label>
-            </a>
-          </span>
-        </div>
       </div>
-      <div className="bg-[#fff] rounded-[20px] px-5 pb-5 pt-2  z-40  shadow-md" >
-      <div className="flex flex-row justify-between items-center ">
-          <label className="font-medium text-[18px]">OMISM Chat</label>
-          <label className="text-[#94A3B8]">Video Chat Web APP</label>
-        </div>
-        <img
-          src={OmismChat}
-          className="w-[400px]  rounded-[10px] border " //border-[4px] border-brand-primary 
-        />
-     
-        <div className="flex flex-row justify-between items-center mt-4">
-          <div className="flex flex-row gap-3  ">
-            {/* <div className="flex flex-row gap-3">
-              <FeatherIcon
-                icon={"github"}
-                size={20}
-                fill="#fff"
-                stroke="#000"
-                strokeWidth={2}
-              />{" "}
-              <span className="flex flex-col">
-                <a
-                  href="https://github.com/NavasVincent"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <label className="text-[#94A3B8] flex flex-row gap-1 hover:underline hover:text-[dodgerblue] cursor-pointer">
-                    Repository
-                  </label>
-                </a>
-              </span>
-            </div> */}
-            <div className="flex flex-row gap-3">
-              <FeatherIcon
-                icon={"figma"}
-                size={20}
-                fill="#fff"
-                stroke="#000"
-                strokeWidth={2}
-              />{" "}
-              <span className="flex flex-col">
-                <a
-                  href="https://www.figma.com/design/34o97RHCYwhuJxiRaFEDvj/OMISM-MOBILE-APP?node-id=53-2&t=IvuaNjJaZjZerKPs-0"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <label className="text-[#94A3B8] flex flex-row gap-1 hover:underline hover:text-[dodgerblue] cursor-pointer">
-                    Figma Design
-                  </label>
-                </a>
-              </span>
-            </div>
-          </div>
-          <span className="flex flex-col">
-            <a
-              href="https://omism.chat/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <label className="text-[#94A3B8] flex flex-row gap-1 hover:underline hover:text-[dodgerblue] cursor-pointer">
-                DEMO
-                <FeatherIcon
-                  icon={"external-link"}
-                  size={16}
-                  fill="#fff"
-                  stroke="#94A3B8"
-                  strokeWidth={1}
-                />
-              </label>
-            </a>
-          </span>
-        </div>
-      </div>
-      
-      <div className="bg-[#fff] rounded-[20px] px-5 pb-5 pt-2  z-40 shadow-md" >
-      <div className="flex flex-row justify-between items-center ">
-          <label className="font-medium text-[18px]">OMISM Chat</label>
-          <label className="text-[#94A3B8]">Video Chat Web APP</label>
-        </div>
-        <img
-          src={OmismChat}
-          className="w-[400px]  rounded-[10px] border " //border-[4px] border-brand-primary 
-        />
-     
-        <div className="flex flex-row justify-between items-center mt-4">
-          <div className="flex flex-row gap-3  ">
-            {/* <div className="flex flex-row gap-3">
-              <FeatherIcon
-                icon={"github"}
-                size={20}
-                fill="#fff"
-                stroke="#000"
-                strokeWidth={2}
-              />{" "}
-              <span className="flex flex-col">
-                <a
-                  href="https://github.com/NavasVincent"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <label className="text-[#94A3B8] flex flex-row gap-1 hover:underline hover:text-[dodgerblue] cursor-pointer">
-                    Repository
-                  </label>
-                </a>
-              </span>
-            </div> */}
-            <div className="flex flex-row gap-3">
-              <FeatherIcon
-                icon={"figma"}
-                size={20}
-                fill="#fff"
-                stroke="#000"
-                strokeWidth={2}
-              />{" "}
-              <span className="flex flex-col">
-                <a
-                  href="https://www.figma.com/design/34o97RHCYwhuJxiRaFEDvj/OMISM-MOBILE-APP?node-id=53-2&t=IvuaNjJaZjZerKPs-0"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <label className="text-[#94A3B8] flex flex-row gap-1 hover:underline hover:text-[dodgerblue] cursor-pointer">
-                    Figma Design
-                  </label>
-                </a>
-              </span>
-            </div>
-          </div>
-          <span className="flex flex-col">
-            <a
-              href="https://omism.chat/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <label className="text-[#94A3B8] flex flex-row gap-1 hover:underline hover:text-[dodgerblue] cursor-pointer">
-                DEMO
-                <FeatherIcon
-                  icon={"external-link"}
-                  size={16}
-                  fill="#fff"
-                  stroke="#94A3B8"
-                  strokeWidth={1}
-                />
-              </label>
-            </a>
-          </span>
-        </div>
-      </div>
-      
-     </div>
     </motion.section>
   );
 };

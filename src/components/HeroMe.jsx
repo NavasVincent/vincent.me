@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import img from "../assets/Rectangle-bg.png";
 import img1 from "../assets/me1.png";
-import {handleCalendlyPopup} from "../Functions/tools"
+import FeatherIcon from "feather-icons-react";
+import { handleCalendlyPopup } from "../Functions/tools";
+import MyCv from "../assets/Vincent_Navas_CV.pdf";
 const HeroMe = () => {
   const fullText = "VINCENT BOTALON NAVAS";
   const [displayText, setDisplayText] = useState("");
@@ -47,6 +49,15 @@ const HeroMe = () => {
     return () => clearInterval(blinkInterval);
   }, []);
 
+  const downloadCV = () => {
+    const link = document.createElement("a");
+    link.href = MyCv; // Update with the correct path
+    link.download = "Vincent-Navas-CV.pdf"; // Name of the downloaded file
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <section
       className="bg-no-repeat bg-cover bg-center w-full h-[703px] flex items-center px-4"
@@ -74,7 +85,13 @@ const HeroMe = () => {
             transition={{ duration: 1.5, ease: "easeInOut" }}
           >
             {displayText}
-            <span className={`${cursorColor} ${showCursor ? "opacity-100" : "opacity-0"}`}>|</span>
+            <span
+              className={`${cursorColor} ${
+                showCursor ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              |
+            </span>
           </motion.h2>
           <motion.h4
             className="text-[20px] font-light text-white lg:text-[14px]"
@@ -82,13 +99,13 @@ const HeroMe = () => {
             animate={{ opacity: 1, letterSpacing: "0px" }}
             transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
           >
-          Crafting Seamless Experiences through Code and Creativity.
+            Crafting Seamless Experiences through Code and Creativity.
           </motion.h4>
-          <div className="flex flex-row gap-3 mt-6 lg:justify-center justify-start">
+          <div className="flex flex-row gap-3 mt-6 lg:justify-center justify-start md:flex-col md:px-[100px]">
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="uppercase bg-brand-primary text-white px-8 py-2 rounded transition-all duration-300 hover:bg-orange-600"
+              className="uppercase bg-orange-600 text-white px-8 py-2 rounded transition-all duration-300 hover:bg-brand-primary"
               onClick={handleCalendlyPopup}
             >
               Book a Call
@@ -100,22 +117,42 @@ const HeroMe = () => {
             >
               Contact Me
             </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="flex flex-row gap-2 uppercase border-2 border-solid border-white text-white px-4 py-2 rounded transition-all duration-300 justify-center"
+              onClick={downloadCV}
+            >
+              <FeatherIcon
+                icon={"download"}
+                size={16}
+                // fill="#fff"
+                stroke="#fff"
+                strokeWidth={2}
+                className=""
+              />
+              Download CV
+            </motion.button>
           </div>
         </motion.div>
         <motion.img
-  src={img1}
-  className="w-[250px] z-50 md:w-[200px]"
-  width="300"
-  initial={{ opacity: 0, x: 50 }}
-  animate={{ opacity: 1, x: 0, y: [0, -5, 0] }}
-  transition={{
-    opacity: { duration: 0.8, ease: "easeOut", delay: 0.3 },
-    x: { duration: 0.8, ease: "easeOut", delay: 0.3 },
-    y: { repeat: Infinity, repeatType: "mirror", duration: 3, ease: "easeInOut" }
-  }}
-  whileHover={{ scale: 1.05 }}
-/>
-
+          src={img1}
+          className="w-[250px] z-50 md:w-[200px]"
+          width="300"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0, y: [0, -5, 0] }}
+          transition={{
+            opacity: { duration: 0.8, ease: "easeOut", delay: 0.3 },
+            x: { duration: 0.8, ease: "easeOut", delay: 0.3 },
+            y: {
+              repeat: Infinity,
+              repeatType: "mirror",
+              duration: 3,
+              ease: "easeInOut",
+            },
+          }}
+          whileHover={{ scale: 1.05 }}
+        />
       </div>
     </section>
   );

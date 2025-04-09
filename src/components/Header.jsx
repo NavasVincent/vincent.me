@@ -26,6 +26,15 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  const socialMedia = [
+    {
+      icon: "linkedin",
+      url: "https://ph.linkedin.com/in/vincent-navas-8690b4125",
+    },
+    { icon: "instagram", url: "https://www.instagram.com/vhincenavas" },
+    { icon: "facebook", url: "https://www.facebook.com/Vhince.Navs/" },
+  ];
+
   return (
     <AnimatePresence>
       {isVisible && (
@@ -58,42 +67,52 @@ const Header = () => {
 
             {/* Desktop Navigation */}
             <div className="lg:hidden flex flex-row items-center gap-6 text-[13px]">
-              {["About Me","Services", "Experience","Skills", "Contact Me"].map(
-                (item, index) => { 
-                  const sectionId = item
-                    .toLowerCase()
-                    .replace(/\s+/g, "-")
-                    .trim();
+              {[
+                "About Me",
+                "Services",
+                "Experience",
+                "Skills",
+                "Contact Me",
+              ].map((item, index) => {
+                const sectionId = item
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")
+                  .trim();
 
-                  return (
-                    <motion.span
-                      key={index}
-                      whileHover={{ scale: 1.1 }}
-                      className="relative cursor-pointer transition-all duration-300 group"
-                      onClick={() => scrollToSection(sectionId)}
-                    >
-                      {item} 
-                      <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-brand-primary transition-all duration-300 group-hover:w-full"></span>
-                    </motion.span>
-                  );
-                }
-              )}
-              {["linkedin", "instagram", "facebook"].map((icon, index) => (
-                <motion.span
-                  key={index}
-                  whileHover={{ scale: 1.2, rotate: 5 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="p-2 rounded-full bg-white text-brand-primary cursor-pointer transition"
-                >
-                  <FeatherIcon
-                    icon={icon}
-                    size={18}
-                    fill="#fff"
-                    stroke="#fd8a42"
-                    strokeWidth={1}
-                  />
-                </motion.span>
-              ))}
+                return (
+                  <motion.span
+                    key={index}
+                    whileHover={{ scale: 1.1 }}
+                    className="relative cursor-pointer transition-all duration-300 group"
+                    onClick={() => scrollToSection(sectionId)}
+                  >
+                    {item}
+                    <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-brand-primary transition-all duration-300 group-hover:w-full"></span>
+                  </motion.span>
+                );
+              })}
+              {socialMedia.map((icon, index) => (
+                                 <motion.a
+                    key={index}
+                    href={icon.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.2, rotate: 5 }}
+                    whileTap={{ scale: 0.9 }}
+                      className="p-2 rounded-full bg-white text-brand-primary cursor-pointer transition"
+                  
+                  >
+                    <FeatherIcon
+                      icon={icon.icon}
+                      size={18}
+                      fill="#fff"
+                      stroke="#fd8a42"
+                      strokeWidth={1.5}
+                    />
+                  </motion.a>
+                   
+                  ))}
+           
             </div>
           </div>
 
@@ -124,24 +143,27 @@ const Header = () => {
                       {item}
                     </motion.span>
                   )
-                )}
-
+                )} 
                 <div className="flex gap-4 mt-6">
-                  {["linkedin", "instagram", "facebook"].map((icon, index) => (
-                    <motion.span
+                  {socialMedia.map((icon, index) => (
+                    <motion.a
                       key={index}
+                      href={icon.url}
+                      target="_blank"
+                      rel="noopener noreferrer" 
                       whileHover={{ scale: 1.2, rotate: 5 }}
                       whileTap={{ scale: 0.9 }}
                       className="p-3 rounded-full bg-brand-primary text-white cursor-pointer transition"
-                    >
-                      <FeatherIcon
-                        icon={icon}
-                        size={20}
-                        // fill="#fff"
-                        stroke="white"
-                        strokeWidth={1}
-                      />
-                    </motion.span>
+                    >  
+             
+                        <FeatherIcon
+                          icon={icon.icon}
+                          size={20}
+                          // fill="#fff"
+                          stroke="white"
+                          strokeWidth={2}
+                        />
+                      </motion.a> 
                   ))}
                 </div>
               </motion.div>
