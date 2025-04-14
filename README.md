@@ -2,7 +2,7 @@
 
 This is a modern and responsive personal portfolio website built with **React**, **Vite**, and **Tailwind CSS**. It's designed to showcase Vincent Navas' work, skills, and contact information in a clean and performant way. Deployed via **GitHub Pages**.
 
-🔗 [Live Website](https://NavasVincent.github.io/vincent-me/)
+🔗 [Live Website](https://NavasVincent.github.io/vincent.me/)
 
 ---
 
