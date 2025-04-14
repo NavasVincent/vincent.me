@@ -34,6 +34,21 @@ This is a modern and responsive personal portfolio website built with **React**,
 ---
 
 ## 📁 Project Structure
+vincent-me/
+├── public/             # Static assets
+├── src/
+│   ├── assets/         # Images and media
+│   ├── components/     # Reusable components
+│   ├── pages/          # Route-level components
+│   ├── App.jsx         # Root component
+│   └── main.jsx        # Entry point
+├── .eslintrc.json      # ESLint configuration
+├── tailwind.config.js  # Tailwind CSS configuration
+├── vite.config.js      # Vite configuration
+├── package.json        # Project metadata and dependencies
+└── README.md           # Project documentation
+
+
 ## 📦 Installation
 
 Make sure you have **Node.js** and **npm** installed.
