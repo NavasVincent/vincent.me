@@ -1,8 +1,45 @@
-# React + Vite
+# 🌐 Vincent Navas — Personal Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a modern and responsive personal portfolio website built with **React**, **Vite**, and **Tailwind CSS**. It's designed to showcase Vincent Navas' work, skills, and contact information in a clean and performant way. Deployed via **GitHub Pages**.
 
-Currently, two official plugins are available:
+🔗 [Live Website](https://NavasVincent.github.io/vincent-me/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
+
+## 🚀 Features
+
+- ⚡️ Super fast Vite build setup
+- 🎨 Utility-first styling with Tailwind CSS
+- 🎥 Smooth animations using Framer Motion
+- ✉️ Contact form with EmailJS integration
+- ✅ Google ReCAPTCHA v3 for spam protection
+- 📦 Easy deployment with GitHub Pages
+- 📱 Fully responsive design
+
+---
+
+## 🧱 Tech Stack
+
+| Tech                | Description                          |
+|---------------------|--------------------------------------|
+| **React**           | UI Library for building components   |
+| **Vite**            | Fast frontend build tool             |
+| **Tailwind CSS**    | Utility-first CSS framework          |
+| **Framer Motion**   | Animation library for React          |
+| **EmailJS**         | Send emails directly from frontend   |
+| **Feather Icons**   | Icon library                         |
+| **React Router DOM**| Client-side routing                  |
+| **GitHub Pages**    | Hosting the site                     |
+
+---
+
+## 📁 Project Structure
+## 📦 Installation
+
+Make sure you have **Node.js** and **npm** installed.
+
+```bash
+git clone https://github.com/NavasVincent/vincent-me.git
+cd vincent-me
+npm install or npm i .
+npm run dev 

@@ -3,10 +3,12 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/me-rounded.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
     rel="stylesheet" />
+   
+ 
   <title>Vincent.Me</title>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -27,7 +29,7 @@
         ball.style.height = ball.style.width;
 
         balls.push(ball);
-        document.body.append(ball);
+        document.getElementById("balls-container").append(ball);
       }
 
       // Keyframes
@@ -56,9 +58,26 @@
 </head>
 
 <body>
+  <div id="balls-container"></div>
   <div id="root"></div>
+
   <script type="module" src="/src/main.jsx"></script>
   <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet"> </link>
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script> 
+
+<script src="https://www.google.com/recaptcha/api.js" async defer>
+
+document.addEventListener("DOMContentLoaded", function () {
+  if (window.grecaptcha) {
+    window.grecaptcha.render("recaptcha-container", {
+      sitekey: "6LfhDu8qAAAAAFzHlqFtTiSBg1d4-3_ifUyV4gdt"
+    });
+  }
+});
+</script>
+ 
 </body>
 
 </html>

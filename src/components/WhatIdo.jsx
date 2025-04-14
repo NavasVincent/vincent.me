@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import FeatherIcon from "feather-icons-react";
 
+import { Each, Show,truncateText } from "@bluelens/react-utils";
 const cardDetails = [
   {
     title: "UI/UX",
@@ -51,60 +53,61 @@ const WhatIdo = () => {
   };
 
   return (
-    <section className="w-full gap-3 flex flex-col justify-between items-start max-w-[1150px] m-auto py-8 mt-5 gap-[50px]">
-      <div className="flex flex-col items-center gap-1 ml-6 pt-[70px]">
-        <h2 className="text-[24px] font-medium mb-2">What I do</h2>
-        <p className="text-[#94A3B8] font-light text-[12px] leading-relaxed text-center">
+    <section className="w-full flex flex-col items-center max-w-[1150px] m-auto py-8 px-4 md:px-4 mt-5" id="services">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-center mb-6"
+      >
+        <h2 className="text-[22px] sm:text-[24px] font-medium">What I do</h2>
+        <p className="text-[#94A3B8] text-[12px] sm:text-[14px] leading-relaxed">
           I design and develop websites, create engaging graphic designs,
           capture moments through photography, and build user-friendly web
-          applications. These passions allow me to combine creativity and
-          technology to deliver impactful digital experiences.
+          applications.
         </p>
-      </div>
-      <div className="flex flex-wrap justify-center gap-[50px]">
-  {cardDetails.map((card, index) => (
-    <div
-      key={index}
-      className="p-[20px] rounded-[10px] bg-base-white shadow-card flex flex-col justify-between gap-2 h-fit flex-grow-0 w-full sm:w-[calc(50%-25px)] lg:w-[calc(33.333%-33.333px)]"
-    >
-      <div className="flex flex-col">
-        <span className="flex flex-row gap-2 items-center text-[18px]">
-          <FeatherIcon
-            icon={card.icon}
-            size={24}
-            stroke="#F59E0B"
-            strokeWidth={1.5}
-          />
-          {card.title}
-        </span>
-        <div
-          className={`overflow-hidden transition-[max-height] duration-500 ease-in-out`}
-          style={{
-            maxHeight: expanded[index] ? "1000px" : "72px", // Adjust '72px' based on 4 lines of content
-          }}
-        >
-          <p className="font-light text-[12px] leading-relaxed mt-2 text-[#94A3B8]">
-            {card.description}
-          </p>
-        </div>
-      </div>
-      <button
-        className="text-[12px] flex flex-row items-center gap-2 mt-2"
-        onClick={() => toggleExpand(index)}
-      >
-        {expanded[index] ? "Show Less" : "Read More"}
-        <FeatherIcon
-          icon={expanded[index] ? "arrow-up" : "arrow-right"}
-          size={12}
-          stroke="black"
-          strokeWidth={1}
-        />
-      </button>
-    </div>
-  ))}
-</div>
+      </motion.div>
 
-
+      <div className="grid md:flex md:flex-col lg:grid-cols-2 grid-cols-3 gap-6 w-full z-30">
+      <Each
+          of={cardDetails}
+          render={(card, index) => {
+ return <motion.div
+            key={index}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            className="p-5 rounded-[10px] bg-white shadow-lg flex flex-col justify-between gap-2 transition-all duration-300 hover:shadow-xl h-[fit-content] cursor-pointer"
+          >
+            <div className="flex flex-col">
+              <span className="flex flex-row gap-2 items-center text-[18px]">
+                <FeatherIcon icon={card.icon} size={24} stroke="#F59E0B" />
+                {card.title}
+              </span>
+              <div
+                className={`overflow-hidden transition-[max-height] duration-500 ease-in-out`}
+                // style={{
+                //   maxHeight: expanded[index] ? "500px" : "60px",
+                // }}
+              >
+                <p className="text-[#94A3B8] text-[12px] sm:text-[14px] leading-relaxed mt-2">
+                  {expanded[index] ?  card?.description: truncateText(card.description, 120) }
+                </p>
+              </div>
+            </div>
+            <button
+              className="text-[12px] flex flex-row items-center gap-2 mt-2 transition-all duration-300 hover:text-brand-primary"
+              onClick={() => toggleExpand(index)}
+            >
+              {expanded[index] ? "Show Less" : "Read More"}
+              <FeatherIcon
+                icon={expanded[index] ? "arrow-up" : "arrow-right"}
+                size={12}
+              />
+            </button>
+          </motion.div>
+          }} />
+      </div>
     </section>
   );
 };

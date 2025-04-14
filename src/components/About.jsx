@@ -1,49 +1,84 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { motion } from "framer-motion";
 import img2 from "../assets/me2.png";
+import { handleCalendlyPopup } from "../Functions/tools";
 const About = () => {
   return (
-    <section className=" w-full  gap-3 flex flex-row justify-between items-start  max-w-[1150px] m-auto w-full py-8 mt-5">
-      <div className="w-full relative">
-        <div className=" w-[300px]">
-          <img src={img2} className="w-full relative" />
-        </div>
-        <div className="absolute bottom-6 right-0 left-[200px] z-20">
-          <div className="flex flex-col gap-1 bg-white shadow-card rounded-[10px] p-4 w-[200px] text-center leading-none">
-            <h1 className="uppercase text-[14px] font-semibold ">
+    <section
+      className="w-full flex lg:flex-col  lg:items-center flex-row gap-6 items-center justify-between max-w-[1150px] mx-auto py-12 px-4"
+      id="about-me"
+    >
+      {/* Image Section */}
+      <div className="relative w-[280px] md:w-[300px] flex-shrink-0">
+        <motion.img
+          src={img2}
+          className="w-full rounded-lg"
+          alt="Profile"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          whileHover={{ scale: 1.05 }} // Slight scale-up on hover
+        />
+
+        {/* Floating Info Card */}
+        <motion.div
+          className="absolute bottom-6 right-0 left-[120px] md:left-[50%] z-20"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <div className="flex flex-col gap-1 bg-white shadow-lg rounded-lg p-4 w-[180px] md:w-[200px] text-center leading-none border border-gray-200">
+            <h1 className="uppercase text-[14px] font-semibold text-gray-900">
               Software Engineer
             </h1>
-            <span className="text-[10px] text-[#94A3B8] font-regular">
+            <span className="text-[11px] text-gray-500">
               5+ Years Experience
             </span>
-            <span className="text-[8px] text-[#BBC4D2] font-regular">
+            <span className="text-[9px] text-gray-400">
               (2 Years as Junior Developer)
             </span>
           </div>
-        </div>
+        </motion.div>
       </div>
-      <div className="flex flex-col gap-2 ml-6 pt-[60px]">
-        <h2 className="text-[24px] font-medium mb-4">
+
+      {/* Text Section */}
+      <motion.div
+        className="flex flex-col gap-4 text-left max-w-[600px] lg:items-center "
+        initial={{ opacity: 0, x: -30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <h2 className="text-[24px] font-semibold text-gray-900">
           I'm a Passionate Software Engineer
         </h2>
-        <p className="text-[#94A3B8] font-light text-[12px] leading-relaxed">
+        <p className="text-gray-600 text-[14px] leading-relaxed">
           I'm a passionate Software Engineer with a strong foundation in both
           frontend and backend technologies. I specialize in creating dynamic,
-          user-friendly applications, utilizing my skills in JavaScript,
-          ReactJS, NodeJS, and various other frameworks. Driven by a love for
-          problem-solving and innovation, I am dedicated to writing clean,åç
-          efficient code that enhances user experiences and optimizes
-          performance. My focus is on continuous learning and staying updated
-          with the latest trends in software development to deliver impactful
-          solutions that exceed client expectations.
-          <br /> <br />I enjoy working in teams, where we can solve problems and
-          succeed together. I’m always looking to grow as a software engineer,
-          focusing on delivering quality solutions that truly make an impact.
+          user-friendly applications using JavaScript, ReactJS, NodeJS, and
+          various other frameworks. Driven by a love for problem-solving and
+          innovation, I focus on writing clean, efficient code that enhances
+          user experiences and improves performance.
+          <br />
+          <br />
+          Currently working full-time, I'm now exploring independent contract
+          opportunities with a remote (WFH) setup. I enjoy collaborating in team
+          environments where we can solve problems and succeed together. I'm
+          always striving to grow as a software engineer while delivering
+          impactful, high-quality solutions.
         </p>
-        <button className="mt-4 uppercase text-brand-primary border border-solid border-brand-primary w-[150px] px-8 py-2 rounded hover:bg-brand-primary hover:text-white">
-          Hire me
-        </button>
-      </div>
+
+        {/* Hire Me Button */}
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="mt-4 uppercase text-brand-primary border border-solid border-brand-primary px-8 py-2 rounded-lg hover:bg-brand-primary hover:text-white transition-all duration-300 w-[fit-content]"
+          onClick={handleCalendlyPopup}
+        >
+          Set A Meeting
+        </motion.button>
+      </motion.div>
     </section>
   );
 };
+
 export { About };
