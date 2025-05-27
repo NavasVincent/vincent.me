@@ -50,11 +50,7 @@ const GetInTouch = () => {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Invalid email format";
-    }
-    if (!formData.subject.trim()) newErrors.subject = "Subject is required";
-    if (!formData.message.trim() || formData.message.length < 10)
-      newErrors.message = "Message must be at least 10 characters";
-    // if (!recaptchaToken) newErrors.recaptcha = "Please complete the reCAPTCHA";
+    } 
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
