@@ -21,4 +21,4 @@ import{a as Y,r as l,j as e,A as V,m as r,F as y,d as g,b as H,e as F,R as U,c a
           }
         }
           
-      `})]})};function Le(){return e.jsx(Q,{children:e.jsx(q,{children:e.jsx("div",{className:"font-sans bg-gray-50 font-regular text-[12px] z-30 min-h-screen flex flex-col",children:e.jsxs(Z,{children:[e.jsx(M,{path:"/",element:e.jsxs(e.Fragment,{children:[e.jsx(_,{}),e.jsx(ve,{}),e.jsx(he,{})]})}),e.jsx(M,{path:"/gender-reveal",element:e.jsx(ze,{})})]})})})})}K.createRoot(document.getElementById("root")).render(e.jsx(l.StrictMode,{children:e.jsx(Le,{})}));
+      `})]})};function Le(){return e.jsx(Q,{children:e.jsx(q,{children:e.jsx("div",{className:"font-sans bg-gray-50 text-[12px] z-30 min-h-screen flex flex-col",children:e.jsxs(Z,{children:[e.jsx(M,{path:"/",element:e.jsxs(e.Fragment,{children:[e.jsx(_,{}),e.jsx(ve,{}),e.jsx(he,{})]})}),e.jsx(M,{path:"/gender-reveal",element:e.jsx(ze,{})})]})})})})}K.createRoot(document.getElementById("root")).render(e.jsx(l.StrictMode,{children:e.jsx(Le,{})}));
