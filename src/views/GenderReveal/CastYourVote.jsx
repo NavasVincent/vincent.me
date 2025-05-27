@@ -404,7 +404,7 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
                     value={voteGuestNameGirl}
                     onChange={(e) => setVoteGuestNameGirl(e.target.value)}
                   />
-                   {voteGuestNameBoy && errorMessage && (
+                   {voteGuestNameGirl && errorMessage && (
                     <div className=" text-[red] rounded mb-4 text-left">
                         {errorMessage}
                     </div>
