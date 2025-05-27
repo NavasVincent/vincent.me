@@ -10,7 +10,7 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
   const [voteList, setVoteList] = useRecoilState(voteState);
   const [teamBoyVotes, setTeamBoyVotes] = useState();
   const [teamGirlVotes, setTeamGirlVotes] = useState();
-
+  const [errorMessage, setErrorMessage] = useState("");
   const [modalData, setModalData] = useState({
     visible: false,
     type: "",
@@ -50,28 +50,26 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
    
     let guestName =
       team === "boy" ? voteGuestNameBoy.trim() : voteGuestNameGirl.trim(); 
-    if (!guestName || guestName.length === 0) {
-      alert("Please enter your name before voting.");
-      return;
-    }
-
-    // Optional: Validate length (at least 2 characters)
-    if (guestName.length < 2) {
-      alert("Name must be at least 2 characters long.");
-      return;
-    }
-
-    // Optional: Validate allowed characters (letters, spaces, hyphen, apostrophe)
-    const nameRegex = /^[a-zA-Z\s'-]+$/;
-    if (!nameRegex.test(guestName)) {
-      alert("Name can only contain letters, spaces, hyphens, and apostrophes.");
-      return;
-    }
-
-    if (isNameAlreadyInList(guestName, voteList)) {
-      alert("This name has already been used to vote.");
-      return;
-    }
+      if (!guestName || guestName.length === 0) {
+        setErrorMessage("Please enter your name before voting.");
+        return;
+      }
+      
+      if (guestName.length < 2) {
+        setErrorMessage("Name must be at least 2 characters long.");
+        return;
+      }
+      
+      const nameRegex = /^[a-zA-Z\s'-]+$/;
+      if (!nameRegex.test(guestName)) {
+        setErrorMessage("Name can only contain letters, spaces, hyphens, and apostrophes.");
+        return;
+      }
+      
+      if (isNameAlreadyInList(guestName, voteList)) {
+        setErrorMessage("This name has already been used to vote.");
+        return;
+      }
  
     setIsLoading(true);
     // Submit vote to SheetDB
@@ -171,6 +169,13 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
     // let list = separateVotesByGender(voter); 
     // setVoteList(list);
   }, []);
+
+  useEffect(() => {
+    if (errorMessage) {
+      const timeout = setTimeout(() => setErrorMessage(""), 3000);
+      return () => clearTimeout(timeout);
+    }
+  }, [errorMessage]);
 
   useEffect(() => {
     setTeamBoyVotes(boys?.length || 0);
@@ -331,14 +336,20 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
                 <div className="flex-1">
                   <input
                     type="text"
-                    className="w-full px-4 py-3 rounded-lg border-2 border-blue-200 focus:border-blue-500 focus:outline-none mb-3"
+                    className="w-full px-4 py-3 rounded-lg border-2 border-blue-200 focus:border-blue-500 focus:outline-none  "
                     placeholder="Enter your name"
                     value={voteGuestNameBoy}
                     onChange={(e) => setVoteGuestNameBoy(e.target.value)}
                   />
+            
+                  {voteGuestNameBoy && errorMessage && (
+                    <div className=" text-[red] rounded mb-4 text-left">
+                        {errorMessage}
+                    </div>
+                    )}
                   <button 
                     onClick={() => handleVote("boy")}
-                    className="bg-blue-500 text-white py-2 px-6 rounded-full font-bold hover:bg-blue-600 transition-colors w-full whitespace-nowrap !rounded-button cursor-pointer"
+                    className="mt-3 bg-blue-500 text-white py-2 px-6 rounded-full font-bold hover:bg-blue-600 transition-colors w-full whitespace-nowrap !rounded-button cursor-pointer"
                   >
                     {voteGuestNameBoy && isLoading ? "Please wait..." : "Vote Boy" }
             
@@ -388,15 +399,20 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
                 <div className="flex-1">
                   <input
                     type="text"
-                    className="w-full px-4 py-3 rounded-lg border-2 border-pink-200 focus:border-pink-500 focus:outline-none mb-3"
+                    className="w-full px-4 py-3 rounded-lg border-2 border-pink-200 focus:border-pink-500 focus:outline-none"
                     placeholder="Enter your name"
                     value={voteGuestNameGirl}
                     onChange={(e) => setVoteGuestNameGirl(e.target.value)}
                   />
+                   {voteGuestNameBoy && errorMessage && (
+                    <div className=" text-[red] rounded mb-4 text-left">
+                        {errorMessage}
+                    </div>
+                    )}
                   <button
                     onClick={() => handleVote("girl")}
                     
-                    className="bg-pink-500 text-white py-2 px-6 rounded-full font-bold hover:bg-pink-600 transition-colors w-full whitespace-nowrap !rounded-button cursor-pointer"
+                    className="mt-3 bg-pink-500 text-white py-2 px-6 rounded-full font-bold hover:bg-pink-600 transition-colors w-full whitespace-nowrap !rounded-button cursor-pointer"
                   >
                       {voteGuestNameGirl && isLoading ? "Please wait..." : "Vote Girl" }
          

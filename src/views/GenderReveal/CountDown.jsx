@@ -48,7 +48,7 @@ const CountDown = () => {
             transition={{ duration: 1 }}
           >
             <h2 className="text-5xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-700">
-              🎉 It's a Boy! 🚀💙
+             ----
             </h2>
             <p className="text-xl text-gray-600">Thank you for waiting!</p>
           </motion.div>
@@ -87,7 +87,7 @@ const CountDown = () => {
               })}
             </div>
             <p className="mt-12 text-xl text-gray-600">
-              Mark your calendar for May 30, 2025 at 4:00 PM
+              Mark your calendar for May 30, 2025 at 4:00 PM — and stay tuned for the raffle draw to see who wins in the gender reveal!
             </p>
           </>
         )}
