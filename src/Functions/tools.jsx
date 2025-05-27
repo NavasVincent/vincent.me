@@ -25,3 +25,27 @@ export const scrollToSection = (id) => {
     window.history.pushState(null, "", `#${id}`);
   }
   };
+
+  export const separateVotesByGender = (votes) => {
+    const boys = [];
+    const girls = [];
+  
+    votes?.forEach((vote) => {
+      if (vote.gender.toLowerCase() === "boy") {
+        boys.push(vote);
+      } else if (vote.gender.toLowerCase() === "girl") {
+        girls.push(vote);
+      }
+    });
+  
+    return {
+      boys,
+      girls,
+    };
+  };
+
+
+  export const isNameAlreadyInList = (name, list) => { 
+    const allGuests = [...list.boys, ...list.girls];
+    return allGuests.some(guest => guest.name.trim().toLowerCase() === name.trim().toLowerCase());
+  };
