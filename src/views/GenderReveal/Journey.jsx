@@ -49,6 +49,13 @@ className="py-16 px-4 bg-white"
                   "Preparing all necessities: diapers, clothes, feeding supplies, and more! 👶",
                 icon: "fa-baby",
               },
+              {
+                date: "August 2025",
+                title: "Expected Delivery Data",
+                description:
+                   "The big day is almost here! We're counting down the days to meet our little bundle of joy. 🍼❤️",
+                icon: "fa-baby",
+              },
             ].map((event, index) => (
               <div
                 key={index}

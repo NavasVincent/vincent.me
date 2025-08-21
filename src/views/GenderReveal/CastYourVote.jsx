@@ -16,6 +16,7 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
     type: "",
     message: "",
   });
+  const [voteTeam, setVoteTeam] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   // const [voteGuestName, setVoteGuestName] = useState("");
   const [voteGuestNameBoy, setVoteGuestNameBoy] = useState("");
@@ -23,7 +24,7 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
 
   const getVotes = async () => {
     try {
-      const response = await fetch("https://sheetdb.io/api/v1/znykdh0itd6gu", {
+      const response = await fetch("https://sheetdb.io/api/v1/1zf9k23vem0xs", {
         method: "GET",
         headers: {
           Authorization: "Basic " + btoa(`${basic_auth}`),
@@ -38,7 +39,7 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
       let list = separateVotesByGender(data);
 
       setVoteList(list);
-    //   console.log("Fetched votes:", data);
+      //   console.log("Fetched votes:", data);
       return data; // returns an array of votes
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -47,33 +48,37 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
   };
 
   const handleVote = (team) => {
-   
     let guestName =
-      team === "boy" ? voteGuestNameBoy.trim() : voteGuestNameGirl.trim(); 
-      if (!guestName || guestName.length === 0) {
-        setErrorMessage("Please enter your name before voting.");
-        return;
-      }
-      
-      if (guestName.length < 2) {
-        setErrorMessage("Name must be at least 2 characters long.");
-        return;
-      }
-      
-      const nameRegex = /^[a-zA-Z\s'-]+$/;
-      if (!nameRegex.test(guestName)) {
-        setErrorMessage("Name can only contain letters, spaces, hyphens, and apostrophes.");
-        return;
-      }
-      
-      if (isNameAlreadyInList(guestName, voteList)) {
-        setErrorMessage("This name has already been used to vote.");
-        return;
-      }
- 
+      team === "boy" ? voteGuestNameBoy.trim() : voteGuestNameGirl.trim();
+    setVoteTeam(team);
+    if (!guestName || guestName.length === 0) {
+      console.log(
+        voteGuestNameBoy,
+        voteGuestNameBoy.length === 0,
+        "voteGuestNameBoy"
+      );
+      setErrorMessage("Please enter your name before voting.");
+      return;
+    }
+
+    if (guestName.length < 3) {
+      setErrorMessage("Name must be at least 3 characters long.");
+      return;
+    }
+
+    const nameRegex = /^[a-zA-Z]+$/;
+    if (!nameRegex.test(guestName)) {
+      setErrorMessage("Name can only contain letters (A–Z, a–z).");
+      return;
+    }
+
+    if (isNameAlreadyInList(guestName, voteList)) {
+      setErrorMessage("This name has already been used to vote.");
+      return;
+    } 
     setIsLoading(true);
     // Submit vote to SheetDB
-    fetch("https://sheetdb.io/api/v1/znykdh0itd6gu", {
+    fetch("https://sheetdb.io/api/v1/1zf9k23vem0xs", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -91,14 +96,13 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
     })
       .then((res) => res.json())
       .then(() => {
-        setModalData({
-          visible: true,
-          type: "success",
-          message: `🎉 Thank you, ${guestName}, for voting for the ${
-            team === "boy" ? "Boy 👦" : "Girl 👧"
-          }! Your support means a lot to us. 💖`,
-        });
-
+        // setModalData({
+        //   visible: true,
+        //   type: "success",
+        //   message: `🎉 Thank you, ${guestName}, for voting for the ${
+        //     team === "boy" ? "Boy 👦" : "Girl 👧"
+        //   }! Your support means a lot to us. 💖`,
+        // });
         const newVote = {
           id: "",
           name: guestName,
@@ -114,7 +118,7 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
           setVoteGuestNameBoy("");
           setVoteList((prev) => ({
             ...prev,
-            boys: [newVote, ...prev.boys],
+            boys: [...prev.boys, newVote]
           }));
         } else {
           setTeamGirlVotes((prev) => prev + 1);
@@ -123,13 +127,16 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
           setVoteGuestNameGirl("");
           setVoteList((prev) => ({
             ...prev,
-            girls: [newVote, ...prev.girls],
+            girls: [...prev.girls, newVote] 
           }));
         }
-
+        setVoteTeam("");
         setShowConfetti(true);
-        setModalData({ ...modalData, visible: false });
-        setTimeout(() => setShowConfetti(false), 5000);
+      
+        setTimeout(() => {setShowConfetti(false)
+          setModalData({ ...modalData, visible: false });
+
+        }, 5000);
       })
       .catch(() => {
         setModalData({
@@ -141,7 +148,7 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
       });
   };
 
-  useEffect(() => {
+  useEffect(() => { 
     getVotes()
     // let voter = [
     //   {
@@ -166,7 +173,7 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
     //     message: "",
     //   },
     // ];
-    // let list = separateVotesByGender(voter); 
+    // let list = separateVotesByGender(voter);
     // setVoteList(list);
   }, []);
 
@@ -255,8 +262,7 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
   const totalVotes = teamBoyVotes + teamGirlVotes;
   const boyPercentage = totalVotes > 0 ? (teamBoyVotes / totalVotes) * 100 : 50;
   const girlPercentage =
-    totalVotes > 0 ? (teamGirlVotes / totalVotes) * 100 : 50;
-
+    totalVotes > 0 ? (teamGirlVotes / totalVotes) * 100 : 50; 
   return (
     <motion.section
       initial={{ opacity: 0, y: 50 }}
@@ -312,7 +318,7 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
           </div>
         </div>
         <div className="flex flex-row gap-8 md:flex-col">
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl shadow-lg overflow-hidden">
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl shadow-lg overflow-hidden w-full">
             <div className="p-8">
               <div className="flex justify-between items-center mb-6">
                 <h3 className="text-3xl font-bold text-blue-700">
@@ -341,18 +347,19 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
                     value={voteGuestNameBoy}
                     onChange={(e) => setVoteGuestNameBoy(e.target.value)}
                   />
-            
-                  {voteGuestNameBoy && errorMessage && (
-                    <div className=" text-[red] rounded mb-4 text-left">
-                        {errorMessage}
+
+                  {voteTeam == "boy" && errorMessage && (
+                    <div className="text-[red] rounded mb-4 text-left">
+                      {errorMessage}
                     </div>
-                    )}
-                  <button 
+                  )}
+                  <button
                     onClick={() => handleVote("boy")}
                     className="mt-3 bg-blue-500 text-white py-2 px-6 rounded-full font-bold hover:bg-blue-600 transition-colors w-full whitespace-nowrap !rounded-button cursor-pointer"
                   >
-                    {voteGuestNameBoy && isLoading ? "Please wait..." : "Vote Boy" }
-            
+                    {voteGuestNameBoy && isLoading
+                      ? "Please wait..."
+                      : "Vote Boy"}
                   </button>
                 </div>
               </div>
@@ -362,21 +369,23 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
                 </h4>
                 <div className="max-h-40 overflow-y-auto">
                   <div className="space-y-2">
-                    {boys?.map((voter, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center gap-2 text-gray-600"
-                      >
-                        <i className="fas fa-user-circle"></i>
-                        <span>{voter.name}</span>
-                      </div>
-                    ))}
+                    {boys
+                      ?.map((voter, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center gap-2 text-gray-600"
+                        >
+                          <i className="fas fa-user-circle"></i>
+                          <span>{voter.name}</span>
+                        </div>
+                      ))
+                      .reverse()}
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-2xl shadow-lg overflow-hidden">
+          <div className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-2xl shadow-lg overflow-hidden w-full">
             <div className="p-8">
               <div className="flex justify-between items-center mb-6">
                 <h3 className="text-3xl font-bold text-pink-600">
@@ -404,18 +413,18 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
                     value={voteGuestNameGirl}
                     onChange={(e) => setVoteGuestNameGirl(e.target.value)}
                   />
-                   {voteGuestNameGirl && errorMessage && (
+                  {voteTeam == "girl" && errorMessage && (
                     <div className=" text-[red] rounded mb-4 text-left">
-                        {errorMessage}
+                      {errorMessage}
                     </div>
-                    )}
+                  )}
                   <button
                     onClick={() => handleVote("girl")}
-                    
                     className="mt-3 bg-pink-500 text-white py-2 px-6 rounded-full font-bold hover:bg-pink-600 transition-colors w-full whitespace-nowrap !rounded-button cursor-pointer"
                   >
-                      {voteGuestNameGirl && isLoading ? "Please wait..." : "Vote Girl" }
-         
+                    {voteGuestNameGirl && isLoading
+                      ? "Please wait..."
+                      : "Vote Girl"}
                   </button>
                 </div>
               </div>
@@ -425,15 +434,17 @@ const CastYourVote = ({ setConfettiTeam, setShowConfetti }) => {
                 </h4>
                 <div className="max-h-40 overflow-y-auto">
                   <div className="space-y-2">
-                    {girls?.map((voter, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center gap-2 text-gray-600"
-                      >
-                        <i className="fas fa-user-circle"></i>
-                        <span>{voter.name}</span>
-                      </div>
-                    ))}
+                    {girls
+                      ?.map((voter, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center gap-2 text-gray-600"
+                        >
+                          <i className="fas fa-user-circle"></i>
+                          <span>{voter.name}</span>
+                        </div>
+                      ))
+                      .reverse()}
                   </div>
                 </div>
               </div>

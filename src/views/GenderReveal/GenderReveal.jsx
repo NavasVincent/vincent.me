@@ -10,6 +10,7 @@ const GenderReveal = () => {
   const [confettiTeam, setConfettiTeam] = useState(""); 
 
   useEffect(() => {
+    console.log("Updated: Gender Reveal & Raffle Winner")
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -143,7 +144,7 @@ const GenderReveal = () => {
         <div className="max-w-4xl mx-auto text-center">
           <p className="mb-4">
             <span className="text-blue-500">May 30, 2025</span> •
-            <span className="text-pink-500"> 4:00 PM</span> •
+            <span className="text-pink-500">5:00 PM</span> •
             <span className="text-blue-500"> Blk 55 Lot 03 ,Navas Residence, Purok 3 Hiraya Manawari Phase 2 Brgy. San Vicente, Tabaco City, Albay</span>,
              
           </p>

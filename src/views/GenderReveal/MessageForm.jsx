@@ -128,7 +128,7 @@ const MessageForm = () => {
     if (isNameAlreadyInList(guestName, voteList)) return;
     if (!guestName) return;
     setIsLoading(true);
-    fetch("https://sheetdb.io/api/v1/znykdh0itd6gu", {
+    fetch("https://sheetdb.io/api/v1/1zf9k23vem0xs", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -150,8 +150,8 @@ const MessageForm = () => {
           id: "",
           name: guestName,
           gender: team,
-          email: "",
-          message: "",
+          email: formData.message,
+          message: formData.email,
           date: new Date().toISOString(),
         };
         setIsLoading(false);

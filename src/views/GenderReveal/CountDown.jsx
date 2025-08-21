@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-
+import { useRecoilState, useRecoilValue } from "recoil";
+import { voteState, raffleWinnerState } from "../../recoil/voteStore";
+const basic_auth = import.meta.env.VITE_BASIC_AUTH;
 const CountDown = () => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -9,8 +11,13 @@ const CountDown = () => {
     seconds: 0,
   });
   const [showGender, setShowGender] = useState(false);
+  const [showRaffleAnimation, setShowRaffleAnimation] = useState(false);
+  const [displayedName, setDisplayedName] = useState("");
+  const { boys } = useRecoilValue(voteState);
+  const [raffleWinner, setRaffleWinner] = useRecoilState(raffleWinnerState);
+  const [nameColor, setNameColor] = useState("text-blue-500");
 
-  const targetDate = new Date("2025-05-30T16:00:00");
+  const targetDate = new Date("2025-05-30T17:00:00"); //2025-05-30T16:00:00
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,6 +40,88 @@ const CountDown = () => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    getCheckWinner();
+  }, [showGender]);
+
+  const getCheckWinner = async () => {
+    let get_winner 
+    if(showGender) get_winner = await getWinnerFromSheetDB();
+
+    if (showGender && !get_winner && boys.length > 0) {
+      setShowRaffleAnimation(true);
+      let count = 0;
+      const maxCount = 75; // 10 seconds total (50 * 200ms)
+      const shuffleInterval = setInterval(() => {
+        const randomBoy = boys[Math.floor(Math.random() * boys.length)];
+        setDisplayedName(randomBoy.name);
+        // Alternate color: even = blue, odd = pink
+        setNameColor(count % 2 === 0 ? "text-blue-500" : "text-pink-500");
+        count++;
+        if (count >= maxCount) {
+          clearInterval(shuffleInterval);
+          const finalWinner = boys[Math.floor(Math.random() * boys.length)];
+          markWinnerMessage(finalWinner);
+          setDisplayedName(finalWinner.name);
+          setRaffleWinner(finalWinner);
+          setShowRaffleAnimation(false);
+        }
+      }, 200);
+    }
+  };
+  const getWinnerFromSheetDB = async () => {
+    try {
+      const res = await fetch(
+        "https://sheetdb.io/api/v1/1zf9k23vem0xs/search?message=winner",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Basic " + btoa(basic_auth),
+          },
+        }
+      );
+
+      const data = await res.json();
+
+      if (data.length > 0) { 
+        setRaffleWinner(data[0]);
+        return data[0]; // return the first winner (in case there's more than one)
+      } else {
+        console.log("⚠️ No winner found.");
+        return null;
+      }
+    } catch (err) {
+      console.error("❌ Failed to fetch winner from SheetDB:", err);
+      return null;
+    }
+  };
+
+  const markWinnerMessage = async (finalWinner, matchBy = "id") => {
+    try {
+      const column = matchBy;
+      const value = encodeURIComponent(finalWinner[matchBy]);
+
+      const res = await fetch(
+        `https://sheetdb.io/api/v1/1zf9k23vem0xs/${column}/${value}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Basic " + btoa(basic_auth),
+          },
+          body: JSON.stringify({
+            message: "winner",
+          }),
+        }
+      );
+
+      const result = await res.json();
+    } catch (err) {
+      console.error("❌ Failed to update winner in SheetDB:", err);
+    }
+  };
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 50 }}
@@ -48,9 +137,34 @@ const CountDown = () => {
             transition={{ duration: 1 }}
           >
             <h2 className="text-5xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-700">
-             ----
+       🎉 It's a BOY! 💙
             </h2>
             <p className="text-xl text-gray-600">Thank you for waiting!</p>
+
+            {/* Raffle section */}
+            {showRaffleAnimation ? (
+              <div className="mt-10">
+                <motion.h3
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 0.5,
+                    repeatType: "reverse",
+                  }}
+                  className={`text-3xl font-bold ${nameColor} `} 
+                >
+                  🎁 Picking Raffle Winner: {displayedName}
+                </motion.h3>
+              </div>
+            ) : raffleWinner ? (
+              <div className="mt-10">
+                <h3  className={`text-3xl font-bold ${nameColor} `} >
+                  🏆 Raffle Winner: {raffleWinner.name}
+                </h3>
+                <p className="text-gray-500 mt-2">{raffleWinner.email}</p>
+              </div>
+            ) : null}
           </motion.div>
         ) : (
           <>
@@ -87,7 +201,8 @@ const CountDown = () => {
               })}
             </div>
             <p className="mt-12 text-xl text-gray-600">
-              Mark your calendar for May 30, 2025 at 4:00 PM — and stay tuned for the raffle draw to see who wins in the gender reveal!
+              Mark your calendar for May 30, 2025 at 5:00 PM — and stay tuned
+              for the raffle draw to see who wins in the gender reveal!
             </p>
           </>
         )}

@@ -10,6 +10,7 @@ const GiftRegistry = () => {
   const registryItems = {
     essentials: [
       { name: "Modern Convertible Crib", status: "Sponsored By: TITA LEE" },
+      { name: "Electric Steam Sterilizer with dryer", status: "Sponsored By: Mngr. Sarah Ganda" },
       { name: "Stroller", status: "Available" },
       { name: "Baby Monitor", status: "Available" },
       { name: "Diaper Bag", status: "Purchased" },
