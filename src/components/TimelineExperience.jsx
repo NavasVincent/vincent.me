@@ -13,7 +13,7 @@ const timeLineExperience = [
   {
     jobTitle: "Software Engineer",
     companyLogo: Boomai,
-    employmentType: "Full-time",
+    employmentType: "Remote",
     companyName: "Boom AI Solutions OPC",
     employmentPeriod: "February 14, 2022 - Present",
     jobDescription: `Build reusable components to simplify development for the team, transform UI designs into
